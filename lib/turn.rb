@@ -19,13 +19,10 @@ end
 
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-def position_taken?(board, index)
-    if board[index] == "X" || board[index] == "O"
-     return true
+def move(array, index, value = "X")
 
-    else index == " " || index == "" || index == "nil"
-     return false
-   end
+  array[index] = value
+
 end
 
 def valid_move?(board, index)
@@ -36,12 +33,24 @@ def valid_move?(board, index)
     end
 end
 
-def move(array, index, value = "X")
-
-  array[index] = value
-
-end
-
 def turn(board)
   puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
+  if valid_move?(board,index)
+    move(board, index, "X")
+  else
+    puts "Invalid move - please enter a valid move 1-9"
+    turn(board)
+  end
 end
+
+def position_taken?(board, index)
+    if board[index] == "X" || board[index] == "O"
+     return true
+
+    else index == " " || index == "" || index == "nil"
+     return false
+   end
+end
+
